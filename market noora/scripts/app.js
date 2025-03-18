@@ -1,60 +1,60 @@
-// ÈíÇäÇÊ ÇáãäÊÌÇÊ
+// Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª
 const products = [
     {
         id: 1,
-        name: "ÓÇÚÉ ĞßíÉ",
+        name: "Ø³Ø§Ø¹Ø© Ø°ÙƒÙŠØ©",
         price: 499,
         category: "electronics",
         image: "images/products/smart-watch.jpg"
     },
     {
         id: 2,
-        name: "ÍŞíÈÉ äÓÇÆíÉ",
+        name: "Ø­Ù‚ÙŠØ¨Ø© Ù†Ø³Ø§Ø¦ÙŠØ©",
         price: 299,
         category: "fashion",
         image: "images/products/bag.jpg"
     },
     {
         id: 3,
-        name: "åÇÊİ Ğßí",
+        name: "Ù‡Ø§ØªÙ Ø°ÙƒÙŠ",
         price: 1200,
         category: "electronics",
         image: "images/products/phone.jpg"
     },
     {
         id: 4,
-        name: "áÇÈÊæÈ",
+        name: "Ù„Ø§Ø¨ØªÙˆØ¨",
         price: 8500,
         category: "electronics",
         image: "images/products/laptop.jpg"
     },
     {
         id: 5,
-        name: "ÓãÇÚÉ áÇ ÓáßíÉ",
+        name: "Ø³Ù…Ø§Ø¹Ø© Ù„Ø§ Ø³Ù„ÙƒÙŠØ©",
         price: 450,
         category: "electronics",
         image: "images/products/headphones.jpg"
     },
     {
         id: 6,
-        name: "ãáÇÈÓ ÚíÏ ááÃæáÇÏ",
+        name: "Ù…Ù„Ø§Ø¨Ø³ Ø¹ÙŠØ¯ Ù„Ù„Ø£ÙˆÙ„Ø§Ø¯",
         price: 350,
         category: "fashion",
         image: "images/products/eid-boys.jpg"
     },
     {
         id: 7,
-        name: "ãáÇÈÓ ÚíÏ ááÈäÇÊ",
+        name: "Ù…Ù„Ø§Ø¨Ø³ Ø¹ÙŠØ¯ Ù„Ù„Ø¨Ù†Ø§Øª",
         price: 400,
         category: "fashion",
         image: "images/products/eid-girls.jpg"
     }
 ];
 
-// ÚÑÈÉ ÇáÊÓæŞ
+// Ø¹Ø±Ø¨Ø© Ø§Ù„ØªØ³ÙˆÙ‚
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// ÚÑÖ ÇáãäÊÌÇÊ
+// Ø¹Ø±Ø¶ Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª
 function renderProducts(filter = 'all') {
     const productsGrid = document.querySelector('.products-grid');
     productsGrid.innerHTML = '';
@@ -71,9 +71,9 @@ function renderProducts(filter = 'all') {
                 </div>
                 <div class="product-info">
                     <h3>${product.name}</h3>
-                    <p class="product-price">${product.price * 7} Ì.ã</p>
+                    <p class="product-price">${product.price * 7} Ø¬.Ù…</p>
                     <button class="add-to-cart" onclick="addToCart(${product.id})">
-                        ÅÖÇİÉ Åáì ÇáÓáÉ
+                        Ø¥Ø¶Ø§ÙØ© Ø¥Ù„Ù‰ Ø§Ù„Ø³Ù„Ø©
                     </button>
                 </div>
             </div>
@@ -82,7 +82,7 @@ function renderProducts(filter = 'all') {
     });
 }
 
-// ÅÖÇİÉ Åáì ÇáÓáÉ
+// Ø¥Ø¶Ø§ÙØ© Ø¥Ù„Ù‰ Ø§Ù„Ø³Ù„Ø©
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
     cart.push(product);
@@ -90,13 +90,13 @@ function addToCart(productId) {
     updateCartCounter();
 }
 
-// ÊÍÏíË ÚÏÇÏ ÇáÓáÉ
+// ØªØ­Ø¯ÙŠØ« Ø¹Ø¯Ø§Ø¯ Ø§Ù„Ø³Ù„Ø©
 function updateCartCounter() {
     const counter = document.querySelector('.cart-counter');
     counter.textContent = cart.length;
 }
 
-// ÊÕİíÉ ÇáãäÊÌÇÊ
+// ØªØµÙÙŠØ© Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª
 document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         document.querySelector('.filter-btn.active').classList.remove('active');
@@ -105,7 +105,7 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     });
 });
 
-// ÇáÊãÑíÑ ÇáÓáÓ ÚäÏ ÇáäŞÑ Úáì ÇáÑæÇÈØ
+// Ø§Ù„ØªÙ…Ø±ÙŠØ± Ø§Ù„Ø³Ù„Ø³ Ø¹Ù†Ø¯ Ø§Ù„Ù†Ù‚Ø± Ø¹Ù„Ù‰ Ø§Ù„Ø±ÙˆØ§Ø¨Ø·
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -120,7 +120,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ÇáÊåíÆÉ ÇáÃæáíÉ
+// Ø§Ù„ØªÙ‡ÙŠØ¦Ø© Ø§Ù„Ø£ÙˆÙ„ÙŠØ©
 document.addEventListener('DOMContentLoaded', () => {
     renderProducts();
     updateCartCounter();
