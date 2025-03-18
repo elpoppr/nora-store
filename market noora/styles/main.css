@@ -18,7 +18,7 @@ body {
     color: var(--dark-text);
 }
 
-/* ÔÑíØ ÇáÊäŞá */
+/* Ø´Ø±ÙŠØ· Ø§Ù„ØªÙ†Ù‚Ù„ */
 .navbar {
     background: white;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -63,7 +63,7 @@ body {
     background: var(--secondary-color);
 }
 
-/* ŞÓã "ãä äÍä" */
+/* Ù‚Ø³Ù… "Ù…Ù† Ù†Ø­Ù†" */
 .about-section {
     padding: 5rem 1rem;
     background: white;
@@ -90,7 +90,7 @@ body {
     color: var(--secondary-color);
 }
 
-/* ÒÑ ÇáÑÌæÚ Åáì ÇáÑÆíÓíÉ */
+/* Ø²Ø± Ø§Ù„Ø±Ø¬ÙˆØ¹ Ø¥Ù„Ù‰ Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ© */
 .back-to-home {
     display: inline-flex;
     align-items: center;
@@ -109,7 +109,7 @@ body {
     transform: translateY(-3px);
 }
 
-/* ŞÓã ÇáãäÊÌÇÊ */
+/* Ù‚Ø³Ù… Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª */
 .products-section {
     padding: 5rem 1rem;
 }
@@ -174,7 +174,7 @@ body {
     background: var(--secondary-color);
 }
 
-/* äãæĞÌ ÇáÇÊÕÇá */
+/* Ù†Ù…ÙˆØ°Ø¬ Ø§Ù„Ø§ØªØµØ§Ù„ */
 .contact-section {
     padding: 5rem 1rem;
     background: var(--light-bg);
@@ -226,7 +226,7 @@ button[type="submit"]:hover {
     background: var(--secondary-color);
 }
 
-/* ÇáÊĞííá */
+/* Ø§Ù„ØªØ°ÙŠÙŠÙ„ */
 .main-footer {
     background: var(--primary-color);
     color: white;
