@@ -4,8 +4,8 @@ const products = [
     { id: 3, name: "هاتف محمول", price: 1200, category: "electronics", image: "images/products/phone.jpg" },
     { id: 4, name: "لابتوب", price: 8500, category: "electronics", image: "images/products/laptop.jpg" },
     { id: 5, name: "سماعات لاسلكية", price: 450, category: "electronics", image: "images/products/headphones.jpg" },
-    { id: 6, name: "ملابس أطفال", price: 350, category: "fashion", image: "images/products/boys-clothes.jpg" },
-    { id: 7, name: "فساتين سهرة", price: 400, category: "fashion", image: "images/products/girls-clothes.jpg" }
+    { id: 6, name: "ملابس عيد للاولاد", price: 350, category: "fashion", image: "images/products/eid-boys.jpg" },
+    { id: 7, name: "ملابس عيد للبنات", price: 400, category: "fashion", image: "images/products/eid-girls.jpg" }
 ];
 
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
