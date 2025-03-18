@@ -3,21 +3,20 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نورا ستور - Nora Store</title>
-    <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
     <!-- شريط التنقل -->
     <nav class="navbar">
         <div class="container">
-            <a href="#home" class="logo">
+            <a href="#" class="logo" onclick="scrollToTop()">
                 <img src="images/logo.jpg" alt="نورا ستور">
             </a>
             <div class="nav-links">
-                <a href="#home" class="active">الرئيسية</a>
+                <a href="#" class="active" onclick="scrollToTop()">الرئيسية</a>
                 <a href="#products">المنتجات</a>
-                <a href="#about">من نحن</a>
-                <a href="#contact">اتصل بنا</a>
+                <a href="#" onclick="openModal('aboutModal')">من نحن</a>
                 <a href="#cart" class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-counter">0</span>
@@ -29,82 +28,59 @@
         </div>
     </nav>
 
-    <!-- القسم الرئيسي -->
-    <main>
-        <!-- قسم "من نحن" -->
-        <section id="about" class="about-section">
-            <div class="about-content">
-                <h2 class="section-title">من نحن؟</h2>
-                <div class="about-text">
-                    <p>
-                        أنا مبرمج من القاهرة، تحديدًا من حلوان اسمي محمد ايهاب أدرس البرمجة منذ أكثر من 7 سنوات. 
-                        هذا الموقع هو مشروع متجر إلكتروني طُلب مني تصميمه، وقد اخترت تسميته 
-                        <strong>"نورا ستور"</strong> تكريمًا لروح والدتي المرحومة، التي كانت دائمًا مصدر إلهامي ودعمي.
-                    </p>
-                    <p>
-                        أرجو من كل زائر كريم أن يدعو لها بالمغفرة والرحمة، فقد كانت أمًا عظيمة علمتني الصبر والإصرار.
-                    </p>
-                    <p>
-                        تم بناء الموقع باستخدام أحدث تقنيات الويب (HTML, CSS, JavaScript) لضمان تجربة مستخدم سلسة وآمنة.
-                    </p>
-                </div>
-                <a href="#home" class="back-to-home">
-                    <i class="fas fa-home"></i>
-                    الرجوع إلى الرئيسية
-                </a>
-            </div>
-        </section>
+    <!-- القسم البطولي -->
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <h1>مرحبًا في نورا ستور</h1>
+            <a href="#products" class="cta-button">تصفح الآن</a>
+        </div>
+    </section>
 
-        <!-- قسم المنتجات -->
-        <section id="products" class="products-section">
+    <!-- المنتجات -->
+    <main>
+        <section id="products" class="products-section animate-on-scroll">
             <h2 class="section-title">أحدث المنتجات</h2>
             <div class="product-filters">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="ابحث عن منتج...">
+                    <i class="fas fa-search"></i>
+                </div>
                 <button class="filter-btn active" data-filter="all">الكل</button>
                 <button class="filter-btn" data-filter="electronics">إلكترونيات</button>
                 <button class="filter-btn" data-filter="fashion">موضة</button>
             </div>
-            <div class="products-grid">
-                <!-- المنتجات تُضاف ديناميكيًا عبر JavaScript -->
-            </div>
-        </section>
-
-        <!-- نموذج الاتصال -->
-        <section id="contact" class="contact-section">
-            <div class="contact-form">
-                <h2>تواصل معنا</h2>
-                <form id="contactForm" action="https://formspree.io/f/xwplpwye" method="POST">
-                    <div class="form-group">
-                        <input type="text" name="name" placeholder="اسمك الكامل" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" name="_replyto" placeholder="البريد الإلكتروني" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea name="message" placeholder="رسالتك..." required></textarea>
-                    </div>
-                    <button type="submit">إرسال الرسالة</button>
-                </form>
-            </div>
+            <div class="products-grid"></div>
         </section>
     </main>
 
-    <!-- التذييل -->
-    <footer class="main-footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>روابط سريعة</h3>
-                <ul>
-                    <li><a href="#home">الرئيسية</a></li>
-                    <li><a href="#products">المنتجات</a></li>
-                    <li><a href="#about">من نحن</a></li>
-                </ul>
+    <!-- نافذة السلة -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('cartModal')">&times;</span>
+            <h2>سلة التسوق</h2>
+            <div class="cart-items"></div>
+            <div class="cart-total">
+                <p>الإجمالي: <span id="totalPrice">0</span> ج.م</p>
+                <button class="checkout-btn">إتمام الشراء</button>
             </div>
         </div>
-        <div class="copyright">
-            <p>© 2025 نورا ستور. جميع الحقوق محفوظة</p>
-        </div>
-    </footer>
+    </div>
 
+    <!-- نافذة من نحن -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('aboutModal')">&times;</span>
+            <h2>من نحن؟</h2>
+            <div class="about-text">
+                <p>أنا مبرمج من القاهرة، تحديدًا من حلوان، اسمي محمد ايهاب أدرس البرمجة منذ أكثر من 7 سنوات.</p>
+                <p>هذا الموقع هو مشروع متجر إلكتروني طُلب مني تصميمه، وقد اخترت تسميته <strong>"نورا ستور"</strong> تكريمًا لروح والدتي المرحومة.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- المكتبات الخارجية -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script>
     <script src="scripts/app.js"></script>
 </body>
 </html>
