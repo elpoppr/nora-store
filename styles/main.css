@@ -4,6 +4,9 @@
     --light-bg: #f9f9f9;
     --dark-text: #2c3e50;
     --transition: all 0.3s ease;
+    --dark-bg: #1a1a1a;
+    --dark-card-bg: #2d2d2d;
+    --dark-border: #3d3d3d;
 }
 
 * {
@@ -22,7 +25,40 @@ body {
     color: var(--dark-text);
 }
 
-/* الشريط العلوي */
+/* أنماط الوضع الليلي */
+body.dark-mode {
+    background-color: var(--dark-bg);
+    color: white;
+}
+
+.dark-mode .navbar {
+    background: rgba(25, 25, 25, 0.95);
+}
+
+.dark-mode .product-card {
+    background: var(--dark-card-bg);
+}
+
+.dark-mode .modal-content {
+    background: var(--dark-card-bg);
+}
+
+.dark-mode .filter-btn {
+    background: #333;
+    border-color: #444;
+}
+
+.dark-mode .search-bar input {
+    background: #333;
+    border-color: #444;
+    color: white;
+}
+
+.dark-mode .nav-links a {
+    color: #ddd;
+}
+
+/* شريط التنقل */
 .navbar {
     background: rgba(255,255,255,0.95);
     backdrop-filter: blur(10px);
@@ -70,7 +106,7 @@ body {
     background: var(--secondary-color);
 }
 
-/* أيقونة القائمة */
+/* زر القائمة */
 .hamburger {
     background: none;
     border: none;
@@ -89,10 +125,6 @@ body {
 .hamburger:hover i {
     color: var(--secondary-color);
     transform: rotate(90deg);
-}
-
-.hamburger:active i {
-    transform: scale(0.9);
 }
 
 /* القسم البطولي */
@@ -143,10 +175,97 @@ body {
     transform: scale(1.05);
 }
 
-/* المنتجات */
+/* قسم المنتجات */
 .products-section {
     padding: 4rem 2rem;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+/* عوامل التصفية */
+.product-filters {
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.search-bar {
+    position: relative;
+    width: 100%;
+    max-width: 584px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 14px 50px 14px 50px;
+    font-size: 16px;
+    border: 1px solid #dfe1e5;
+    border-radius: 24px;
+    outline: none;
+    transition: all 0.3s ease;
+    background: white;
+    box-shadow: 0 1px 6px rgba(32,33,36,.28);
+}
+
+.search-bar input:hover,
+.search-bar input:focus {
+    box-shadow: 0 1px 6px rgba(32,33,36,.4);
+}
+
+.search-bar .fa-search {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9aa0a6;
+    pointer-events: none;
+}
+
+/* زر الميكروفون (على اليسار) */
+.voice-search-btn {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 2;
+}
+
+.voice-search-btn i {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+.voice-search-btn:hover i {
+    color: var(--secondary-color);
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: 1px solid #dfe1e5;
+    border-radius: 4px;
+    background: white;
+    color: var(--dark-text);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.filter-btn.active {
+    border-color: var(--secondary-color);
+    background: var(--secondary-color);
+    color: white;
 }
 
 .products-grid {
@@ -195,14 +314,19 @@ body {
     padding: 0.8rem 1.5rem;
     border-radius: 25px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: 
+        background 0.3s ease,
+        transform 0.2s ease,
+        box-shadow 0.3s ease;
 }
 
 .add-to-cart:hover {
     background: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
 }
 
-/* نوافذ الـ Modal */
+/* نافذة السلة */
 .modal {
     display: none;
     position: fixed;
@@ -214,18 +338,22 @@ body {
     background: rgba(0,0,0,0.5);
 }
 
+.modal.active {
+    display: block;
+}
+
 .modal-content {
     background: white;
-    margin: 5% auto;
-    padding: 2rem;
-    width: 60%;
+    margin: 2% auto;
+    padding: 1rem;
+    width: 95%;
     border-radius: 10px;
     position: relative;
     animation: modalFade 0.3s ease;
 }
 
 @keyframes modalFade {
-    from { opacity: 0; transform: translateY(-50px); }
+    from { opacity: 0; transform: translateY(100%); }
     to { opacity: 1; transform: translateY(0); }
 }
 
@@ -243,49 +371,392 @@ body {
     align-items: center;
     gap: 1rem;
     margin-bottom: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    transition: transform 0.3s ease;
 }
 
 .cart-item img {
     width: 80px;
     height: 80px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 8px;
+    background: #f5f5f5;
 }
 
-.remove-btn {
+.remove-item {
     background: #e74c3c;
     color: white;
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 20px;
     cursor: pointer;
+    transition: 
+        var(--transition),
+        transform 0.2s ease,
+        box-shadow 0.3s ease;
+}
+
+.remove-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .checkout-btn {
     background: #27ae60;
     color: white;
     border: none;
-    padding: 1rem 2rem;
+    padding: 1.2rem;
     border-radius: 30px;
     cursor: pointer;
     margin-top: 1rem;
     transition: background 0.3s ease;
+    width: 100%;
+    font-size: 1.1rem;
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
 }
 
 .checkout-btn:hover {
     background: #219a52;
 }
 
-/* قسم "من نحن" داخل الـ Modal */
-#aboutModal .about-text {
-    padding: 1rem;
-    line-height: 1.6;
+/* أنماط زر الوضع الليلي (Neo Design) */
+.neo-toggle-container {
+    --toggle-width: 80px;
+    --toggle-height: 38px;
+    --toggle-bg: #181c20;
+    --toggle-off-color: #475057;
+    --toggle-on-color: #36f9c7;
+    --toggle-transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 9999;
 }
 
-/* التجاوب */
+.neo-toggle-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.neo-toggle {
+    position: relative;
+    width: var(--toggle-width);
+    height: var(--toggle-height);
+    display: block;
+    cursor: pointer;
+    transform: translateZ(0);
+    perspective: 500px;
+}
+
+.neo-track {
+    position: absolute;
+    inset: 0;
+    border-radius: calc(var(--toggle-height) / 2);
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transform: translateZ(-1px);
+    transition: transform var(--toggle-transition);
+    box-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.neo-background-layer {
+    position: absolute;
+    inset: 0;
+    background: var(--toggle-bg);
+    background-image: linear-gradient(
+        -45deg,
+        rgba(20, 20, 20, 0.8) 0%,
+        rgba(30, 30, 30, 0.3) 50%,
+        rgba(20, 20, 20, 0.8) 100%
+    );
+    opacity: 1;
+    transition: all var(--toggle-transition);
+}
+
+.neo-grid-layer {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(
+        to right,
+        rgba(71, 80, 87, 0.05) 1px,
+        transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(71, 80, 87, 0.05) 1px, transparent 1px);
+    background-size: 5px 5px;
+    opacity: 0;
+    transition: opacity var(--toggle-transition);
+}
+
+.neo-track-highlight {
+    position: absolute;
+    inset: 1px;
+    border-radius: calc(var(--toggle-height) / 2);
+    background: linear-gradient(90deg, transparent, rgba(54, 249, 199, 0));
+    opacity: 0;
+    transition: all var(--toggle-transition);
+}
+
+.neo-spectrum-analyzer {
+    position: absolute;
+    bottom: 6px;
+    right: 10px;
+    height: 10px;
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    opacity: 0;
+    transition: opacity var(--toggle-transition);
+}
+
+.neo-spectrum-bar {
+    width: 2px;
+    height: 3px;
+    background-color: var(--toggle-on-color);
+    opacity: 0.8;
+}
+
+.neo-thumb {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transform-style: preserve-3d;
+    transition: transform var(--toggle-transition);
+    z-index: 1;
+}
+
+.neo-thumb-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--toggle-off-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all var(--toggle-transition);
+}
+
+.neo-thumb-core {
+    position: absolute;
+    inset: 5px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+    transition: all var(--toggle-transition);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.neo-thumb-icon {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    transition: all var(--toggle-transition);
+}
+
+.neo-thumb-wave {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 2px;
+    background: var(--toggle-off-color);
+    transform: translate(-50%, -50%);
+    transition: all var(--toggle-transition);
+}
+
+.neo-thumb-pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid var(--toggle-off-color);
+    transform: scale(0);
+    opacity: 0;
+    transition: all var(--toggle-transition);
+}
+
+.neo-gesture-area {
+    position: absolute;
+    inset: -10px;
+    z-index: 0;
+}
+
+.neo-interaction-feedback {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.neo-ripple {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        var(--toggle-on-color) 0%,
+        transparent 70%
+    );
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all 0.4s ease-out;
+}
+
+.neo-progress-arc {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: var(--toggle-on-color);
+    transform: translate(-50%, -50%) scale(0) rotate(0deg);
+    opacity: 0;
+    transition:
+        opacity 0.3s ease,
+        transform 0.5s ease;
+}
+
+.neo-status {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.neo-status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.neo-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--toggle-off-color);
+    transition: all var(--toggle-transition);
+}
+
+.neo-status-text {
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--toggle-off-color);
+    letter-spacing: 1px;
+    transition: all var(--toggle-transition);
+}
+
+.neo-value-display {
+    position: absolute;
+    top: -22px;
+    right: 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--toggle-off-color);
+    opacity: 0;
+    transform: translateY(5px);
+    transition: all var(--toggle-transition);
+}
+
+.neo-value-text {
+    transition: all var(--toggle-transition);
+}
+
+/* Active states */
+.neo-toggle-input:checked + .neo-toggle .neo-thumb {
+    transform: translateX(calc(var(--toggle-width) - 38px));
+}
+
+.neo-toggle-input:checked + .neo-toggle .neo-thumb-ring {
+    background-color: var(--toggle-on-color);
+    border-color: rgba(54, 249, 199, 0.3);
+    box-shadow: 0 0 15px rgba(54, 249, 199, 0.5);
+}
+
+.neo-toggle-input:checked + .neo-toggle .neo-thumb-wave {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid #fff;
+}
+
+.neo-toggle-input:checked + .neo-toggle .neo-thumb-pulse {
+    transform: scale(1.2);
+    opacity: 0.3;
+    animation: neo-pulse 1.5s infinite;
+}
+
+.neo-toggle-input:checked + .neo-toggle .neo-track-highlight {
+    background: linear-gradient(90deg, transparent, rgba(54, 249, 199, 0.2));
+    opacity: 1;
+}
+
+.neo-toggle-input:checked + .neo-toggle .neo-grid-layer {
+    opacity: 1;
+}
+
+.neo-toggle-input:checked + .neo-toggle .neo-spectrum-analyzer {
+    opacity: 1;
+}
+
+.neo-toggle-input:checked + .neo-toggle .neo-status-dot {
+    background-color: var(--toggle-on-color);
+    box-shadow: 0 0 8px var(--toggle-on-color);
+}
+
+.neo-toggle-input:checked + .neo-toggle .neo-status-text::before {
+    content: "ACTIVE";
+}
+
+.neo-toggle-input:not(:checked) + .neo-toggle .neo-status-text::before {
+    content: "STANDBY";
+}
+
+@keyframes neo-pulse {
+    0% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.5); opacity: 0.2; }
+    100% { transform: scale(1); opacity: 0.5; }
+}
+
+@keyframes neo-spectrum {
+    0% { height: 3px; }
+    50% { height: 8px; }
+    100% { height: 3px; }
+}
+
+/* التعديلات للهواتف */
 @media (max-width: 768px) {
     .nav-links {
         display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        z-index: 999;
+    }
+
+    .nav-links.active {
+        display: flex !important;
     }
 
     .hamburger {
@@ -302,5 +773,73 @@ body {
 
     .hero-content h1 {
         font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        width: 100% !important;
+        margin: 0 !important;
+        height: 85vh;
+        border-radius: 0;
+        bottom: 0;
+        position: fixed;
+    }
+
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 1rem 0;
+    }
+
+    .cart-item img {
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+    }
+
+    .remove-item {
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .cart-items {
+        max-height: 60vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 0 10px;
+    }
+
+    .checkout-btn {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 0;
+    }
+
+    button {
+        min-width: 48px;
+        min-height: 48px;
+        touch-action: manipulation;
+    }
+
+    .cart-item h4 {
+        font-size: 1.2rem;
+    }
+
+    .cart-item p {
+        font-size: 0.9rem;
+    }
+
+    .remove-item {
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+
+    #totalPrice {
+        font-size: 1.3rem;
     }
 }
