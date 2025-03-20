@@ -1,12 +1,53 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>نورا ستور - Nora Store</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
+    <!-- زر الوضع الليلي -->
+    <div class="dark-mode-toggle">
+        <div class="neo-toggle-container">
+            <input class="neo-toggle-input" id="neo-toggle" type="checkbox" />
+            <label class="neo-toggle" for="neo-toggle">
+                <div class="neo-track">
+                    <div class="neo-background-layer"></div>
+                    <div class="neo-grid-layer"></div>
+                    <div class="neo-spectrum-analyzer">
+                        <div class="neo-spectrum-bar"></div>
+                        <div class="neo-spectrum-bar"></div>
+                        <div class="neo-spectrum-bar"></div>
+                        <div class="neo-spectrum-bar"></div>
+                        <div class="neo-spectrum-bar"></div>
+                    </div>
+                    <div class="neo-track-highlight"></div>
+                </div>
+                <div class="neo-thumb">
+                    <div class="neo-thumb-ring"></div>
+                    <div class="neo-thumb-core">
+                        <div class="neo-thumb-icon">
+                            <div class="neo-thumb-wave"></div>
+                            <div class="neo-thumb-pulse"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="neo-gesture-area"></div>
+                <div class="neo-interaction-feedback">
+                    <div class="neo-ripple"></div>
+                    <div class="neo-progress-arc"></div>
+                </div>
+                <div class="neo-status">
+                    <div class="neo-status-indicator">
+                        <div class="neo-status-dot"></div>
+                        <div class="neo-status-text"></div>
+                    </div>
+                </div>
+            </label>
+        </div>
+    </div>
+
     <!-- شريط التنقل -->
     <nav class="navbar">
         <div class="container">
@@ -17,7 +58,7 @@
                 <a href="#" class="active" onclick="scrollToTop()">الرئيسية</a>
                 <a href="#products">المنتجات</a>
                 <a href="#" onclick="openModal('aboutModal')">من نحن</a>
-                <a href="#cart" class="cart-icon">
+                <a href="#cart" class="cart-icon" onclick="openModal('cartModal')">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-counter">0</span>
                 </a>
@@ -38,16 +79,21 @@
 
     <!-- المنتجات -->
     <main>
-        <section id="products" class="products-section animate-on-scroll">
+        <section id="products" class="products-section">
             <h2 class="section-title">أحدث المنتجات</h2>
             <div class="product-filters">
                 <div class="search-bar">
                     <input type="text" id="searchInput" placeholder="ابحث عن منتج...">
+                    <button class="voice-search-btn">
+                        <i class="fas fa-microphone"></i>
+                    </button>
                     <i class="fas fa-search"></i>
                 </div>
-                <button class="filter-btn active" data-filter="all">الكل</button>
-                <button class="filter-btn" data-filter="electronics">إلكترونيات</button>
-                <button class="filter-btn" data-filter="fashion">موضة</button>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">الكل</button>
+                    <button class="filter-btn" data-filter="electronics">إلكترونيات</button>
+                    <button class="filter-btn" data-filter="fashion">ملابس</button>
+                </div>
             </div>
             <div class="products-grid"></div>
         </section>
@@ -72,7 +118,7 @@
             <span class="close" onclick="closeModal('aboutModal')">&times;</span>
             <h2>من نحن؟</h2>
             <div class="about-text">
-                <p>أنا مبرمج من القاهرة، تحديدًا من حلوان، اسمي محمد ايهاب أدرس البرمجة منذ أكثر من 7 سنوات.</p>
+                <p>أنا مبرمج من القاهرة، تحديدًا من حلوان، أدرس البرمجة منذ أكثر من 7 سنوات.</p>
                 <p>هذا الموقع هو مشروع متجر إلكتروني طُلب مني تصميمه، وقد اخترت تسميته <strong>"نورا ستور"</strong> تكريمًا لروح والدتي المرحومة.</p>
             </div>
         </div>
