@@ -1,4 +1,4 @@
-// ------ القائمة المتنقلة ------ //
+// ------ إدارة القائمة المتنقلة ------ //
 document.querySelector('.hamburger').addEventListener('click', function(e) {
     e.stopPropagation();
     document.querySelector('.nav-links').classList.toggle('active');
@@ -20,15 +20,37 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     });
 });
 
-// ------ المنتجات ------ //
+// ------ بيانات المنتجات ------ //
 const products = [
-    { id: 1, name: "لابتوب", price: 15000, category: "electronics", image: "images/products/laptop.jpg" },
-    { id: 2, name: "هاتف ذكي", price: 5999, category: "electronics", image: "images/products/phone.jpg" },
-    { id: 3, name: "فساتين أطفال", price: 450, category: "fashion", image: "images/products/eid-girls.jpg" },
-    { id: 4, name: "ملابس رجالي", price: 600, category: "fashion", image: "images/products/eid-boys.jpg" },
-    { id: 5, name: "ساعة ذكية", price: 1200, category: "electronics", image: "images/products/smart-watch.jpg" },
-    { id: 6, name: "سماعات", price: 300, category: "electronics", image: "images/products/headphones.jpg" },
-    { id: 7, name: "حقيبة", price: 250, category: "fashion", image: "images/products/bag.jpg" }
+    { 
+        id: 1, 
+        name: "لابتوب", 
+        price: 15000, 
+        category: "electronics", 
+        image: "images/products/laptop.jpg",
+        specs: {
+            "المعالج": "Intel Core i7-1165G7",
+            "الذاكرة": "16GB DDR4",
+            "التخزين": "512GB SSD",
+            "كارت الشاشة": "Intel Iris Xe",
+            "الشاشة": "15.6 بوصة FHD"
+        }
+    },
+    { 
+        id: 2, 
+        name: "هاتف ذكي", 
+        price: 5999, 
+        category: "electronics", 
+        image: "images/products/phone.jpg",
+        specs: {
+            "الشاشة": "6.5 بوصة AMOLED",
+            "المعالج": "Snapdragon 888",
+            "الذاكرة": "8GB RAM",
+            "التخزين": "256GB",
+            "البطارية": "5000mAh"
+        }
+    },
+    // إضافة منتجات أخرى هنا بنفس الهيكل
 ];
 
 // ------ عرض المنتجات ------ //
@@ -37,14 +59,14 @@ function renderProducts(filteredProducts = products) {
     productsGrid.innerHTML = '';
     filteredProducts.forEach(product => {
         const productCard = `
-            <div class="product-card" data-category="${product.category}">
+            <div class="product-card" data-category="${product.category}" onclick="showProductDetails(${product.id})">
                 <div class="product-image">
                     <img src="${product.image}" alt="${product.name}">
                 </div>
                 <div class="product-info">
                     <h3>${product.name}</h3>
-                    <p class="product-price">${product.price} ج.م</p>
-                    <button class="add-to-cart" onclick="addToCart(${product.id})">أضف إلى السلة</button>
+                    <p class="product-price">${product.price.toLocaleString()} ج.م</p>
+                    <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(${product.id})">أضف إلى السلة</button>
                 </div>
             </div>
         `;
@@ -71,15 +93,18 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
 
 // ------ إدارة السلة ------ //
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let currentProductId = null;
 
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
     const existingItem = cart.find(item => item.id === productId);
+    
     if (existingItem) {
         existingItem.quantity += 1;
     } else {
         cart.push({ ...product, quantity: 1 });
     }
+    
     try { navigator.vibrate(50); } catch(e) { console.log("Vibration API not supported"); }
     updateCartUI();
     showToast('تمت إضافة المنتج إلى السلة');
@@ -96,8 +121,10 @@ function updateCartUI() {
     const cartItems = document.querySelector('.cart-items');
     const totalPrice = document.getElementById('totalPrice');
     let total = 0;
+    
     document.querySelector('.cart-counter').textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
     cartItems.innerHTML = '';
+    
     cart.forEach(item => {
         const itemTotal = item.price * item.quantity;
         total += itemTotal;
@@ -106,7 +133,7 @@ function updateCartUI() {
                 <img src="${item.image}" alt="${item.name}" width="60">
                 <div class="item-details">
                     <h4>${item.name}</h4>
-                    <p>${item.price} ج.م × ${item.quantity}</p>
+                    <p>${item.price.toLocaleString()} ج.م × ${item.quantity}</p>
                 </div>
                 <button class="remove-item" onclick="removeFromCart(${item.id})">
                     <i class="fas fa-trash"></i>
@@ -115,8 +142,32 @@ function updateCartUI() {
         `;
         cartItems.insertAdjacentHTML('beforeend', cartItem);
     });
-    totalPrice.textContent = total;
+    
+    totalPrice.textContent = total.toLocaleString();
     localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+// ------ تفاصيل المنتج ------ //
+function showProductDetails(productId) {
+    const product = products.find(p => p.id === productId);
+    currentProductId = productId;
+    
+    document.getElementById('detailProductName').textContent = product.name;
+    document.getElementById('detailProductPrice').textContent = `${product.price.toLocaleString()} ج.م`;
+    document.getElementById('detailProductImage').src = product.image;
+    
+    const specsList = document.getElementById('productSpecs');
+    specsList.innerHTML = '';
+    for (const [key, value] of Object.entries(product.specs)) {
+        specsList.innerHTML += `
+            <li>
+                <span>${key}:</span>
+                <span>${value}</span>
+            </li>
+        `;
+    }
+    
+    openModal('productDetailsModal');
 }
 
 // ------ النوافذ المنبثقة ------ //
@@ -134,6 +185,7 @@ window.onclick = function(event) {
     if (event.target.classList.contains('modal')) {
         closeModal('cartModal');
         closeModal('aboutModal');
+        closeModal('productDetailsModal');
     }
 }
 
@@ -151,23 +203,25 @@ function showToast(message) {
 }
 
 // ------ تأكيد الشراء ------ //
-function confirmCheckout() {
+document.querySelector('.checkout-btn').addEventListener('click', function() {
     if (cart.length === 0) {
         alert('السلة فارغة! أضف منتجات أولاً.');
         return;
     }
+    
     const modal = document.createElement('div');
     modal.className = 'checkout-confirm-modal';
     modal.innerHTML = `
         <div class="confirm-content">
             <h3>تأكيد الطلب</h3>
-            <p>الإجمالي: <span>${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)} ج.م</p>
+            <p>الإجمالي: <span>${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toLocaleString()} ج.م</span></p>
             <div class="confirm-buttons">
                 <button class="confirm-yes">نعم، أكمل</button>
                 <button class="confirm-no">تراجع</button>
             </div>
         </div>
     `;
+
     modal.querySelector('.confirm-yes').addEventListener('click', () => {
         alert('تمت العملية بنجاح! سيصلك إشعار بالتوصيل.');
         cart = [];
@@ -175,11 +229,10 @@ function confirmCheckout() {
         closeModal('cartModal');
         modal.remove();
     });
+    
     modal.querySelector('.confirm-no').addEventListener('click', () => modal.remove());
     document.body.appendChild(modal);
-}
-
-document.querySelector('.checkout-btn').addEventListener('click', confirmCheckout);
+});
 
 // ------ البحث الصوتي ------ //
 if ('webkitSpeechRecognition' in window) {
@@ -193,7 +246,6 @@ if ('webkitSpeechRecognition' in window) {
     document.querySelector('.voice-search-btn').addEventListener('click', () => recognition.start());
 } else {
     document.querySelector('.voice-search-btn').style.display = 'none';
-    console.log("البحث الصوتي غير مدعوم في متصفحك!");
 }
 
 // ------ الوضع الليلي ------ //
@@ -212,3 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+// التهيئة الأولية
+renderProducts();
+updateCartUI();
