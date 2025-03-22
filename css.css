@@ -1,0 +1,146 @@
+/* css.css */
+:root {
+    --base-size: 1vmin;
+    --scale-factor: 1.2;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    margin: 0;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+}
+
+.main_wrapper {
+    position: relative;
+    width: min(90%, 800px);
+    height: auto;
+    aspect-ratio: 4/3;
+}
+
+.main {
+    position: relative;
+    width: 70%;
+    height: 70%;
+    margin: 0 auto;
+    transform: scale(0.9);
+    transform-origin: center;
+}
+
+/* √‰„«ÿ «·ÂÊ«∆Ì („⁄œ·…) */
+.antenna {
+    position: absolute;
+    top: -15vh;
+    left: 50%;
+    transform: translateX(-50%);
+    scale: 0.8;
+}
+
+.antenna_shadow {
+    width: calc(var(--base-size) * 0.8);
+    height: calc(var(--base-size) * 8);
+    background: #333;
+}
+
+/* √‰„«ÿ «· ·›“ÌÊ‰ („⁄œ·) */
+.tv {
+    width: min(100%, 400px);
+    height: auto;
+    aspect-ratio: 3/2;
+    background: linear-gradient(45deg, #222, #444);
+    border-radius: 2vh;
+    margin: 0 auto;
+    box-shadow: 0 1vh 2vh rgba(0,0,0,0.5);
+}
+
+.curve_svg {
+    width: 60%;
+    top: -5vh;
+}
+
+.display_div {
+    top: 4vh;
+    left: 3vw;
+    right: 3vw;
+    bottom: 4vh;
+}
+
+.notfound_text {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+}
+
+/* √‰„«ÿ «·ﬁ«⁄œ… („⁄œ·…) */
+.bottom {
+    bottom: -10vh;
+    scale: 0.8;
+}
+
+.base1, .base2, .base3 {
+    height: 2vh;
+}
+
+/* √‰„«ÿ ‰’ 404 („⁄œ·) */
+.text_404 {
+    font-size: clamp(6rem, 30vw, 20rem);
+}
+
+/* «” ⁄·«„«  «·Ê”«∆ÿ ··‘«‘«  «·’€Ì—… */
+@media (max-width: 768px) {
+    .main {
+        width: 85%;
+        height: 85%;
+    }
+    
+    .antenna {
+        top: -10vh;
+        scale: 0.6;
+    }
+    
+    .text_404 {
+        font-size: clamp(4rem, 25vw, 15rem);
+    }
+    
+    .notfound_text {
+        font-size: clamp(1rem, 3.5vw, 2rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .main {
+        width: 95%;
+        transform: scale(0.8);
+    }
+    
+    .tv {
+        border-radius: 1.5vh;
+    }
+    
+    .buttons_div {
+        bottom: -4vh;
+        scale: 0.8;
+    }
+    
+    .text_404 {
+        font-size: clamp(3rem, 20vw, 12rem);
+    }
+}
+
+/*  Õ”Ì‰«  ··‘«‘«  «·ﬂ»Ì—… */
+@media (min-width: 1600px) {
+    :root {
+        --base-size: 0.8vmin;
+    }
+}
+
+/*  √ÀÌ—«  «·Õ—ﬂ… ( »ﬁÏ ﬂ„« ÂÌ) */
+@keyframes glow { ... }
+@keyframes scanline { ... }
