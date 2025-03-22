@@ -10,41 +10,8 @@
     <!-- زر الوضع الليلي -->
     <div class="dark-mode-toggle">
         <div class="neo-toggle-container">
-            <input class="neo-toggle-input" id="neo-toggle" type="checkbox" />
-            <label class="neo-toggle" for="neo-toggle">
-                <div class="neo-track">
-                    <div class="neo-background-layer"></div>
-                    <div class="neo-grid-layer"></div>
-                    <div class="neo-spectrum-analyzer">
-                        <div class="neo-spectrum-bar"></div>
-                        <div class="neo-spectrum-bar"></div>
-                        <div class="neo-spectrum-bar"></div>
-                        <div class="neo-spectrum-bar"></div>
-                        <div class="neo-spectrum-bar"></div>
-                    </div>
-                    <div class="neo-track-highlight"></div>
-                </div>
-                <div class="neo-thumb">
-                    <div class="neo-thumb-ring"></div>
-                    <div class="neo-thumb-core">
-                        <div class="neo-thumb-icon">
-                            <div class="neo-thumb-wave"></div>
-                            <div class="neo-thumb-pulse"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="neo-gesture-area"></div>
-                <div class="neo-interaction-feedback">
-                    <div class="neo-ripple"></div>
-                    <div class="neo-progress-arc"></div>
-                </div>
-                <div class="neo-status">
-                    <div class="neo-status-indicator">
-                        <div class="neo-status-dot"></div>
-                        <div class="neo-status-text"></div>
-                    </div>
-                </div>
-            </label>
+            <input class="neo-toggle-input" id="neo-toggle" type="checkbox">
+            <label class="neo-toggle" for="neo-toggle"></label>
         </div>
     </div>
 
@@ -57,6 +24,7 @@
             <div class="nav-links">
                 <a href="#" class="active" onclick="scrollToTop()">الرئيسية</a>
                 <a href="#products">المنتجات</a>
+                <a href="mdo.html">المدونة</a>
                 <a href="#" onclick="openModal('aboutModal')">من نحن</a>
                 <a href="#cart" class="cart-icon" onclick="openModal('cartModal')">
                     <i class="fas fa-shopping-cart"></i>
@@ -69,7 +37,7 @@
         </div>
     </nav>
 
-    <!-- القسم البطولي -->
+    <!-- القسم الرئيسي -->
     <section id="hero" class="hero-section">
         <div class="hero-content">
             <h1>مرحبًا في نورا ستور</h1>
@@ -77,7 +45,7 @@
         </div>
     </section>
 
-    <!-- المنتجات -->
+    <!-- قسم المنتجات -->
     <main>
         <section id="products" class="products-section">
             <h2 class="section-title">أحدث المنتجات</h2>
@@ -99,7 +67,7 @@
         </section>
     </main>
 
-    <!-- نافذة السلة -->
+    <!-- نوافذ المنبثقة -->
     <div id="cartModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('cartModal')">&times;</span>
@@ -112,14 +80,30 @@
         </div>
     </div>
 
-    <!-- نافذة من نحن -->
     <div id="aboutModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('aboutModal')">&times;</span>
-            <h2>من نحن؟</h2>
-            <div class="about-text">
-                <p>أنا مبرمج من القاهرة، تحديدًا من حلوان،اسمي محمد ايهاب أدرس البرمجة منذ أكثر من 7 سنوات.</p>
-                <p>هذا الموقع هو مشروع متجر إلكتروني طُلب مني تصميمه، وقد اخترت تسميته <strong>"نورا ستور"</strong> تكريمًا لروح والدتي المرحومة.</p>
+            <h2>من نحن</h2>
+            <p>متجر إلكتروني متخصص في توفير أحدث المنتجات التقنية والملابس العصرية.</p>
+        </div>
+    </div>
+
+    <div id="productDetailsModal" class="modal">
+        <div class="modal-content product-details-modal">
+            <span class="close" onclick="closeModal('productDetailsModal')">&times;</span>
+            <div class="product-details-content">
+                <div class="details-image">
+                    <img id="detailProductImage" src="" alt="">
+                </div>
+                <div class="details-info">
+                    <h2 id="detailProductName"></h2>
+                    <p class="detail-price" id="detailProductPrice"></p>
+                    <div class="specs-list">
+                        <h3>المواصفات الفنية:</h3>
+                        <ul id="productSpecs"></ul>
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart(currentProductId)">أضف إلى السلة</button>
+                </div>
             </div>
         </div>
     </div>
